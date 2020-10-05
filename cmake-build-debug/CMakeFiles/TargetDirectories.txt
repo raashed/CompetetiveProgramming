@@ -1,0 +1,3 @@
+/Volumes/HDD-2/Works/CLionProjects/CompetetiveProgramming/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Volumes/HDD-2/Works/CLionProjects/CompetetiveProgramming/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Volumes/HDD-2/Works/CLionProjects/CompetetiveProgramming/cmake-build-debug/CMakeFiles/CompetetiveProgramming.dir
