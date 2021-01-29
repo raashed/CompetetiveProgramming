@@ -1,3 +1,7 @@
+//
+// Created by raashed on 1/29/21.
+//
+
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -12,7 +16,7 @@ void fastIO() {
 #endif
 }
 
-int arr[100000 + 5], tree[100000 * 4 + 5];
+long long arr[100000 + 5], tree[100000 * 4 + 5];
 
 void build(int n, int l, int r) {
     if (l == r) {
@@ -23,7 +27,19 @@ void build(int n, int l, int r) {
     int m = (l + r) / 2;
     build(n * 2, l, m);
     build(n * 2 + 1, m + 1, r);
-    tree[n] = min(tree[n * 2], tree[n * 2 + 1]);
+    tree[n] = tree[n * 2] + tree[n * 2 + 1];
+}
+
+long long sum(int v, int tl, int tr, int l, int r) {
+    if (l > r) {
+        return 0;
+    }
+    if (l == tl && r == tr) {
+        return tree[v];
+    }
+    int tm = (tl + tr) / 2;
+    return sum(v * 2, tl, tm, l, min(r, tm))
+           + sum(v * 2 + 1, tm + 1, tr, max(l, tm + 1), r);
 }
 
 void update(int v, int tl, int tr, int pos, int new_val) {
@@ -37,21 +53,7 @@ void update(int v, int tl, int tr, int pos, int new_val) {
     } else {
         update(v * 2 + 1, tm + 1, tr, pos, new_val);
     }
-    tree[v] = min(tree[v * 2], tree[v * 2 + 1]);
-}
-
-long long mini(int v, int tl, int tr, int l, int r) {
-    if (l > r) {
-        return 1000000000000000;
-    }
-    if (l == tl && r == tr) {
-        return tree[v];
-    }
-    int tm = (tl + tr) / 2;
-    return min(
-            mini(v * 2, tl, tm, l, min(r, tm)),
-            mini(v * 2 + 1, tm + 1, tr, max(l, tm + 1), r)
-    );
+    tree[v] = tree[v * 2] + tree[v * 2 + 1];
 }
 
 int main() {
@@ -68,7 +70,7 @@ int main() {
         cin >> f >> l >> r;
 
         if (f == 2) {
-            cout << mini(1, 0, n, l, r - 1) << endl;
+            cout << sum(1, 0, n, l, r - 1) << endl;
         } else {
             update(1, 0, n, l, r);
         }
