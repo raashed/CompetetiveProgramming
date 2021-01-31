@@ -56,23 +56,6 @@ long long mini(int v, int tl, int tr, int l, int r) {
 
 int main() {
     fastIO();
-    int n, m, l, r, f;
-    cin >> n >> m;
-
-    for (int i = 0; i < n; i++) {
-        cin >> arr[i];
-    }
-
-    build(1, 0, n);
-    for (int i = 0; i < m; i++) {
-        cin >> f >> l >> r;
-
-        if (f == 2) {
-            cout << mini(1, 0, n, l, r - 1) << endl;
-        } else {
-            update(1, 0, n, l, r);
-        }
-    }
 
     return 0;
 }
