@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/CompetetiveProgramming.dir/main.cpp.o"
-  "CompetetiveProgramming"
+  "CMakeFiles/CompetetiveProgramming.dir/main.cpp.obj"
+  "CompetetiveProgramming.exe"
+  "CompetetiveProgramming.exe.manifest"
+  "CompetetiveProgramming.lib"
   "CompetetiveProgramming.pdb"
 )
 

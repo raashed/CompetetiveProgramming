@@ -6,7 +6,15 @@
 
 #IncludeRegexTransform: 
 
-/home/raashed/CLionProjects/CompetetiveProgramming/main.cpp
-bits/stdc++.h
+C:/Users/rashe/Desktop/CompetetiveProgramming/main.cpp
+iostream
+-
+vector
+-
+string
+-
+algorithm
+-
+deque
 -
 
