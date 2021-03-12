@@ -6,11 +6,7 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/rashe/Desktop/CompetetiveProgramming/main.cpp
-iostream
--
-string
--
-vector
+C:/Users/raashed/CLionProjects/CompetetiveProgramming/main.cpp
+bits/stdc++.h
 -
 

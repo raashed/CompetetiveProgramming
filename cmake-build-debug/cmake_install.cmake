@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/rashe/Desktop/CompetetiveProgramming
+# Install script for directory: C:/Users/raashed/CLionProjects/CompetetiveProgramming
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/rashe/Desktop/CompetetiveProgramming/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/raashed/CLionProjects/CompetetiveProgramming/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

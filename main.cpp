@@ -1,8 +1,99 @@
-#include <iostream>
-#include <string>
-#include <vector>
+#include <bits/stdc++.h>
 
 using namespace std;
+
+void fastIO();
+
+void build(int v, int tl, int tr);
+
+void update(int v, int tl, int tr, int pos, char new_val);
+
+char getVal(int v, int tl, int tr, int pos);
+
+string binaryString, binaryTreeString;
+
+int main() {
+    fastIO();
+
+    int testCases, testCase, queryNumber, left, right, currentIndex;
+    char queryType, currentChar;
+
+    cin >> testCases;
+
+    for (testCase = 1; testCase <= testCases; testCase++) {
+        cout << "Case " << testCase << ":" << endl;
+
+        cin >> binaryString >> queryNumber;
+
+        binaryTreeString.resize(4 * binaryString.size() + 5);
+        build(1, 0, (int) binaryString.size());
+
+        while (queryNumber--) {
+            cin >> queryType;
+
+            if (queryType == 'I') {
+                cin >> left >> right;
+                currentIndex = left - 1;
+                while (currentIndex < right) {
+                    update(1, 0, (int) binaryString.size(), currentIndex,
+                           binaryString[currentIndex] == '0' ? '1' : '0');
+                    binaryString[currentIndex] = binaryString[currentIndex] == '0' ? '1' : '0';
+                    currentIndex++;
+                }
+
+            }
+            if (queryType == 'Q') {
+                cin >> left;
+                cout << getVal(1, 0, (int) binaryString.size(), left - 1) << endl;
+            }
+        }
+
+        binaryString.clear();
+        binaryTreeString.clear();
+        cin.ignore();
+    }
+
+    return 0;
+}
+
+void build(int v, int tl, int tr) {
+    if (tl == tr) {
+        binaryTreeString[v] = binaryString[tl];
+        return;
+    }
+
+    int tm = (tl + tr) / 2;
+    build(v * 2, tl, tm);
+    build(v * 2 + 1, tm + 1, tr);
+}
+
+void update(int v, int tl, int tr, int pos, char new_val) {
+    if (tl == tr) {
+        binaryTreeString[v] = new_val;
+        return;
+    }
+
+    int tm = (tl + tr) / 2;
+    if (pos <= tm) {
+        update(v * 2, tl, tm, pos, new_val);
+        return;
+    }
+
+    update(v * 2 + 1, tm + 1, tr, pos, new_val);
+}
+
+char getVal(int v, int tl, int tr, int pos) {
+    if (tl == tr) {
+        return binaryTreeString[v];
+    }
+
+    int tm = (tl + tr) / 2;
+    if (pos <= tm) {
+        return getVal(v * 2, tl, tm, pos);
+    }
+
+    return getVal(v * 2 + 1, tm + 1, tr, pos);
+}
 
 void fastIO() {
     ios_base::sync_with_stdio(false);
@@ -13,50 +104,4 @@ void fastIO() {
     freopen_s(&stream, "../in.txt", "r", stdin);
     freopen_s(&stream, "../out.txt", "w", stdout);
 #endif
-}
-
-int main() {
-    fastIO();
-    int tc;
-    cin >> tc;
-    for (int i = 1; i <= tc; i++) {
-        vector<string> vector1(105);
-        int currentPosition = 0, lastInserted = 0;
-        vector1[currentPosition] = "http://www.lightoj.com/";
-        cout << "Case " << i << ":" << endl;
-        while (true) {
-            string string1, string2;
-            cin >> string1;
-            if (string1 == "QUIT") {
-                break;
-            }
-            if (string1 == "VISIT") {
-                currentPosition++;
-                lastInserted = currentPosition;
-                cin >> string2;
-                cout << string2 << endl;
-                vector1[currentPosition] = string2;
-            }
-            if (string1 == "BACK") {
-                currentPosition--;
-                if (currentPosition < 0) {
-                    currentPosition = 0;
-                    cout << "Ignored" << endl;
-                } else {
-                    cout << vector1[currentPosition] << endl;
-                }
-            }
-            if (string1 == "FORWARD") {
-                currentPosition++;
-                if (currentPosition > lastInserted) {
-                    cout << "Ignored" << endl;
-                    currentPosition = lastInserted;
-                } else {
-                    cout << vector1[currentPosition] << endl;
-                }
-            }
-            cin.ignore();
-        }
-    }
-    return 0;
 }

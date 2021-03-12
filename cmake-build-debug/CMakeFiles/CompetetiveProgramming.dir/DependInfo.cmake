@@ -4,9 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "C:/Users/rashe/Desktop/CompetetiveProgramming/main.cpp" "C:/Users/rashe/Desktop/CompetetiveProgramming/cmake-build-debug/CMakeFiles/CompetetiveProgramming.dir/main.cpp.obj"
+  "C:/Users/raashed/CLionProjects/CompetetiveProgramming/main.cpp" "C:/Users/raashed/CLionProjects/CompetetiveProgramming/cmake-build-debug/CMakeFiles/CompetetiveProgramming.dir/main.cpp.obj"
   )
-set(CMAKE_CXX_COMPILER_ID "MSVC")
+set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
