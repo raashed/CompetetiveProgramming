@@ -1,107 +1,72 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 
 using namespace std;
-
-void fastIO();
-
-void build(int v, int tl, int tr);
-
-void update(int v, int tl, int tr, int pos, char new_val);
-
-char getVal(int v, int tl, int tr, int pos);
-
-string binaryString, binaryTreeString;
-
-int main() {
-    fastIO();
-
-    int testCases, testCase, queryNumber, left, right, currentIndex;
-    char queryType, currentChar;
-
-    cin >> testCases;
-
-    for (testCase = 1; testCase <= testCases; testCase++) {
-        cout << "Case " << testCase << ":" << endl;
-
-        cin >> binaryString >> queryNumber;
-
-        binaryTreeString.resize(4 * binaryString.size() + 5);
-        build(1, 0, (int) binaryString.size());
-
-        while (queryNumber--) {
-            cin >> queryType;
-
-            if (queryType == 'I') {
-                cin >> left >> right;
-                currentIndex = left - 1;
-                while (currentIndex < right) {
-                    update(1, 0, (int) binaryString.size(), currentIndex,
-                           binaryString[currentIndex] == '0' ? '1' : '0');
-                    binaryString[currentIndex] = binaryString[currentIndex] == '0' ? '1' : '0';
-                    currentIndex++;
-                }
-
-            }
-            if (queryType == 'Q') {
-                cin >> left;
-                cout << getVal(1, 0, (int) binaryString.size(), left - 1) << endl;
-            }
-        }
-
-        binaryString.clear();
-        binaryTreeString.clear();
-        cin.ignore();
-    }
-
-    return 0;
-}
-
-void build(int v, int tl, int tr) {
-    if (tl == tr) {
-        binaryTreeString[v] = binaryString[tl];
-        return;
-    }
-
-    int tm = (tl + tr) / 2;
-    build(v * 2, tl, tm);
-    build(v * 2 + 1, tm + 1, tr);
-}
-
-void update(int v, int tl, int tr, int pos, char new_val) {
-    if (tl == tr) {
-        binaryTreeString[v] = new_val;
-        return;
-    }
-
-    int tm = (tl + tr) / 2;
-    if (pos <= tm) {
-        update(v * 2, tl, tm, pos, new_val);
-        return;
-    }
-
-    update(v * 2 + 1, tm + 1, tr, pos, new_val);
-}
-
-char getVal(int v, int tl, int tr, int pos) {
-    if (tl == tr) {
-        return binaryTreeString[v];
-    }
-
-    int tm = (tl + tr) / 2;
-    if (pos <= tm) {
-        return getVal(v * 2, tl, tm, pos);
-    }
-
-    return getVal(v * 2 + 1, tm + 1, tr, pos);
-}
 
 void fastIO() {
     ios_base::sync_with_stdio(false);
     cin.tie(nullptr);
 
-#ifndef ONLINE_JUDGE
-    FILE *stream;
-    freopen_s(&stream, "../in.txt", "r", stdin);
-    freopen_s(&stream, "../out.txt", "w", stdout);
-#endif
+//#ifndef ONLINE_JUDGE
+//    freopen("../in.txt", "r", stdin);
+//    freopen("../out.txt", "w", stdout);
+//#endif
+}
+
+int main() {
+    fastIO();
+    int testCases, testCase = 1;
+    cin >> testCases;
+    while (testCases--) {
+        int n;
+        cin >> n;
+        long long sumOfAll = 0;
+        int countOfPos = 0;
+        int countOfNeg = 0;
+        vector<int> groupOfNumbers;
+        while (n--) {
+            int temp;
+            cin >> temp;
+            if (temp > 0) {
+                sumOfAll += temp;
+                countOfPos++;
+                if (countOfNeg < 0) {
+                    groupOfNumbers.push_back(countOfNeg);
+                    countOfNeg = 0;
+                }
+            }
+            if (temp < 0) {
+                countOfNeg--;
+                if (countOfPos > 0) {
+                    groupOfNumbers.push_back(countOfPos);
+                    countOfPos = 0;
+                }
+            }
+        }
+        if (countOfNeg < 0) {
+            groupOfNumbers.push_back(countOfNeg);
+        }
+        if (countOfPos > 0) {
+            groupOfNumbers.push_back(countOfPos);
+        }
+        int middleValue = 0;
+        int middleIndex = 0;
+        for (int i = 0; i < groupOfNumbers.size(); i++) {
+            if (middleValue < groupOfNumbers[i]) {
+                middleValue = groupOfNumbers[i];
+                middleIndex = i;
+            }
+        }
+        int countAnswer = 0;
+        for (int i = middleIndex - 1; i >= 0; i--) {
+            if (groupOfNumbers[i] > 0) {
+                countAnswer++;
+            }
+        }
+        for (int i = middleIndex + 1; i < groupOfNumbers.size(); i++) {
+            if (groupOfNumbers[i] > 0) {
+                countAnswer++;
+            }
+        }
+        cout << "Case " << testCase++ << ": " << sumOfAll << " " << countAnswer << endl;
+    }
 }
