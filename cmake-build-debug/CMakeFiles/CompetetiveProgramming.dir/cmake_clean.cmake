@@ -1,9 +1,7 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/CompetetiveProgramming.dir/main.cpp.obj"
-  "CompetetiveProgramming.exe"
-  "CompetetiveProgramming.exe.manifest"
+  "CMakeFiles/CompetetiveProgramming.dir/main.cpp.o"
+  "CompetetiveProgramming"
   "CompetetiveProgramming.pdb"
-  "libCompetetiveProgramming.dll.a"
 )
 
 # Per-language clean rules from dependency scanning.
